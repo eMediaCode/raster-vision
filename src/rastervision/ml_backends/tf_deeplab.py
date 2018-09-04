@@ -306,31 +306,31 @@ def get_training_args(train_py: str, train_logdir_local: str, tfic_index: str,
     """
 
     fields = [
-        'fine_tune_batch_norm',
-        'initialize_last_layer',
-        'last_layers_contain_logits_only',
+        # 'fine_tune_batch_norm',
+        # 'initialize_last_layer',
+        # 'last_layers_contain_logits_only',
         'save_summaries_images',
-        'upsample_logits',
-        'base_learning_rate',
-        'last_layer_gradient_multiplier',
-        'learning_power',
-        'learning_rate_decay_factor',
-        'max_scale_factor',
-        'min_scale_factor',
-        'momentum',
-        'scale_factor_step_size',
-        'slow_start_learning_rate',
-        'weight_decay',
+        # 'upsample_logits',
+        # 'base_learning_rate',
+        # 'last_layer_gradient_multiplier',
+        # 'learning_power',
+        # 'learning_rate_decay_factor',
+        # 'max_scale_factor',
+        # 'min_scale_factor',
+        # 'momentum',
+        # 'scale_factor_step_size',
+        # 'slow_start_learning_rate',
+        # 'weight_decay',
         'decoder_output_stride',
-        'learning_rate_decay_step',
+        # 'learning_rate_decay_step',
         'output_stride',
         'save_interval_secs',
         'save_summaries_secs',
-        'slow_start_step',
+        # 'slow_start_step',
         'train_batch_size',
         'training_number_of_steps',
         'dataset',
-        'learning_policy',
+        # 'learning_policy',
         'model_variant',
         'train_split',
     ]
@@ -349,7 +349,6 @@ def get_training_args(train_py: str, train_logdir_local: str, tfic_index: str,
 
     args.append('--train_logdir={}'.format(train_logdir_local))
     # args.append('--tf_initial_checkpoint={}'.format(tfic_index))
-    args.append('--tf_initial_checkpoint=None')
     args.append('--dataset_dir={}'.format(dataset_dir_local))
 
     for field in multi_fields:
@@ -368,6 +367,8 @@ def get_training_args(train_py: str, train_logdir_local: str, tfic_index: str,
     print('DL_CUSTOM_CLASSES={}'.format(num_classes))
     env['DL_CUSTOM_CLASSES'] = str(num_classes)
 
+    print('XXX')
+    print(args)
     return (args, env)
 
 
@@ -564,6 +565,7 @@ class TFDeeplab(MLBackend):
         with tarfile.open(tfic_tarball, 'r:gz') as tar:
             tar.extractall(tfic_dir)
         tfic_index = glob.glob('{}/*/*.index'.format(tfic_dir))[0]
+        tfic_index = tfic_index[0:-len('.index')]
 
         # Periodically synchronize with remote
         start_sync(
