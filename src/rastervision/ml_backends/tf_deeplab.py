@@ -348,7 +348,8 @@ def get_training_args(train_py: str, train_logdir_local: str, tfic_index: str,
     args = ['python', train_py]
 
     args.append('--train_logdir={}'.format(train_logdir_local))
-    args.append('--tf_initial_checkpoint={}'.format(tfic_index))
+    # args.append('--tf_initial_checkpoint={}'.format(tfic_index))
+    args.append('--tf_initial_checkpoint=None')
     args.append('--dataset_dir={}'.format(dataset_dir_local))
 
     for field in multi_fields:
