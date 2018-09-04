@@ -332,14 +332,14 @@
     "make_training_chips_options": {
         "segmentation_options": {
             "off_target_survival_probability": 0.0,
-            "number_of_chips": 40000,
-            "debug_chip_probability": 0.0025,
+            "number_of_chips": 5929,
+            "debug_chip_probability": 0.016866251,
             "super_window_factor": 1,
             "minor_axis_backoff": 0
         }
     },
     "train_options": {
-        "backend_config_uri": "{rv_root}/rio-1.config",
+        "backend_config_uri": "{rv_root}/rio.config",
         "pretrained_model_uri": "{rv_root}/deeplabv3_xception_2018_01_04.tar.gz",
         "sync_interval": 600,
         "segmentation_options": {
@@ -351,7 +351,7 @@
     },
     "eval_options": {
     },
-    "debug": true,
+    "debug": false,
     "chip_size": 256,
     "raster_transformer": {
         "channel_order": [0, 1, 2]
@@ -367,6 +367,6 @@
     "raw_dataset_key": "rio",
     "dataset_key": "full",
     "model_key": "deeplab",
-    "prediction_key": "test",
+    "prediction_key": "default",
     "eval_key": "default"
 }
