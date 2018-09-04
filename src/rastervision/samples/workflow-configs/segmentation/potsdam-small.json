@@ -1,0 +1,184 @@
+{
+    "train_scenes": [
+        {
+            "id": "2_10",
+            "raster_source": {
+                "geotiff_files": {
+                    "uris": [
+                        "{raw}/4_Ortho_RGBIR/top_potsdam_2_10_RGBIR.tif"
+                    ]
+                }
+            },
+            "ground_truth_label_store": {
+                "segmentation_raster_file": {
+                    "source": {
+                        "image_file": {
+                            "uri": "{raw}/5_Labels_for_participants/top_potsdam_2_10_label.tif"
+                        }
+                    },
+                    "raster_class_map": [
+                        {
+                            "source_class": "#ffffff",
+                            "raster_vision_class": 5
+                        },
+                        {
+                            "source_class": "#0000ff",
+                            "raster_vision_class": 2
+                        },
+                        {
+                            "source_class": "#00ffff",
+                            "raster_vision_class": 3
+                        },
+                        {
+                            "source_class": "#00ff00",
+                            "raster_vision_class": 4
+                        },
+                        {
+                            "source_class": "#ffff00",
+                            "raster_vision_class": 1
+                        },
+                        {
+                            "source_class": "#ff0000",
+                            "raster_vision_class": 6
+                        },
+                        {
+                            "source_class": "#000000",
+                            "raster_vision_class": 7
+                        }
+                    ]
+                }
+            }
+        }
+     ],
+    "test_scenes": [
+        {
+            "id": "2_12",
+            "raster_source": {
+                "geotiff_files": {
+                    "uris": [
+                        "{raw}/4_Ortho_RGBIR/top_potsdam_2_12_RGBIR.tif"
+                    ]
+                }
+            },
+            "ground_truth_label_store": {
+                "segmentation_raster_file": {
+                    "source": {
+                        "image_file": {
+                            "uri": "{raw}/5_Labels_for_participants_no_Boundary/top_potsdam_2_12_label_noBoundary.tif"
+                        }
+                    },
+                    "raster_class_map": [
+                        {
+                            "source_class": "#ffffff",
+                            "raster_vision_class": 5
+                        },
+                        {
+                            "source_class": "#0000ff",
+                            "raster_vision_class": 2
+                        },
+                        {
+                            "source_class": "#00ffff",
+                            "raster_vision_class": 3
+                        },
+                        {
+                            "source_class": "#00ff00",
+                            "raster_vision_class": 4
+                        },
+                        {
+                            "source_class": "#ffff00",
+                            "raster_vision_class": 1
+                        },
+                        {
+                            "source_class": "#ff0000",
+                            "raster_vision_class": 6
+                        },
+                        {
+                            "source_class": "#000000",
+                            "raster_vision_class": 7
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "machine_learning": {
+        "task": "SEMANTIC_SEGMENTATION",
+        "backend": "TF_DEEPLAB",
+        "class_items": [
+            {
+                "id": 5,
+                "name": "Impervious",
+                "color": "#ffffff"
+            },
+            {
+                "id": 2,
+                "name": "Building",
+                "color": "#0000ff"
+            },
+            {
+                "id": 3,
+                "name": "Low Vegitation",
+                "color": "#00ffff"
+            },
+            {
+                "id": 4,
+                "name": "Tree",
+                "color": "#00ff00"
+            },
+            {
+                "id": 1,
+                "name": "Car",
+                "color": "#ffff00"
+            },
+            {
+                "id": 6,
+                "name": "Clutter",
+                "color": "#ff0000"
+            },
+            {
+                "id": 7,
+                "name": "Don't Care",
+                "color": "#000000"
+            }
+        ]
+    },
+    "make_training_chips_options": {
+        "segmentation_options": {
+            "off_target_survival_probability": 0.50,
+            "number_of_chips": 576,
+            "debug_chip_probability": 0.1736,
+            "minor_axis_backoff": 0
+        }
+    },
+    "train_options": {
+        "pretrained_model_uri": "{rv_root}/deeplabv3_xception_2018_01_04.tar.gz",
+        "backend_config_uri": "{rv_root}/potsdam-small.config",
+        "sync_interval": 600,
+        "segmentation_options": {
+        }
+    },
+    "predict_options": {
+        "segmentation_options": {
+        }
+    },
+    "eval_options": {
+    },
+    "debug": true,
+    "chip_size": 256,
+    "raster_transformer": {
+        "channel_order": [0, 1, 2]
+    },
+    "local_uri_map": {
+        "rv_root": "/opt/data/potsdam",
+        "raw": "/opt/data"
+    },
+    "remote_uri_map": {
+        "rv_root": "s3://raster-vision-mcclain/potsdam-small",
+        "raw": "s3://raster-vision-raw-data/isprs-potsdam"
+    },
+    "raw_dataset_key": "potsdam",
+    "dataset_key": "full",
+    "model_key": "deeplab",
+    "prediction_key": "default",
+    "eval_key": "default"
+}
