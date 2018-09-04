@@ -306,12 +306,12 @@ def get_training_args(train_py: str, train_logdir_local: str, tfic_index: str,
     """
 
     fields = [
-        # 'fine_tune_batch_norm',
-        # 'initialize_last_layer',
-        # 'last_layers_contain_logits_only',
+        'fine_tune_batch_norm',
+        'initialize_last_layer',
+        'last_layers_contain_logits_only',
         'save_summaries_images',
         # 'upsample_logits',
-        # 'base_learning_rate',
+        'base_learning_rate',
         # 'last_layer_gradient_multiplier',
         # 'learning_power',
         # 'learning_rate_decay_factor',
